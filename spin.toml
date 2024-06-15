@@ -1,0 +1,18 @@
+spin_manifest_version = 2
+
+[application]
+name = "variable_trigger"
+version = "0.1.0"
+authors = ["Niklas Eicker"]
+description = ""
+
+[[trigger.http]]
+route = "/test/:id"
+component = "variable-trigger"
+
+[component.variable-trigger]
+source = "target/wasm32-wasi/release/variable_trigger.wasm"
+allowed_outbound_hosts = []
+[component.variable-trigger.build]
+command = "cargo build --target wasm32-wasi --release"
+watch = ["src/**/*.rs", "Cargo.toml"]
